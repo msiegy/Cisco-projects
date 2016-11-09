@@ -9,7 +9,7 @@ import os.path
 #load in values from pnp_config.py file, values represent template directory, files, and devices.
 from pnp_config import CONFIGS_DIR, TEMPLATE, DEVICES, KEYVALUE
 
-#output a list of dictionaries from device CSV file. Each dictionary represents a device and its config values.
+#output a list of dictionaries from device CSV file. Each dictionary represents a row from the CSV, AKA a device and its config values.
 def csv_dict_list(devices, role):
     reader = csv.DictReader(open(devices, 'rb'))
     dict_list = []
