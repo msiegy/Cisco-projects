@@ -1,0 +1,86 @@
+hostname spoke21
+!
+enable password cisco123
+!
+username cisco password 0 cisco123
+no aaa new-model
+!
+interface Tunnel101
+ description TO DOMAIN 1 PRIMARY DMVPN HUB
+ ip address 10.10.8.21 255.255.248.0
+ no ip redirects
+ ip mtu 1400
+ ip pim nbma-mode
+ ip nhrp authentication cisco123
+ nhrp group Tier3
+ ip nhrp map multicast dynamic
+ ip nhrp network-id 101
+ ip nhrp holdtime 600
+ ip nhrp nhs 10.10.8.1 nbma 65.65.65.1 multicast
+ ip nhrp registration no-unique
+ ip nhrp shortcut
+ ip tcp adjust-mss 1360
+ if-state nhrp
+ tunnel source GigabitEthernet0/1
+ tunnel mode gre multipoint
+ tunnel key 101
+ tunnel vrf ISP_1
+ tunnel protection ipsec profile DMVPN-PROFILE-TRANSPORT-1
+!
+interface Tunnel102
+ description TO DOMAIN 1 SECONDARY DMVPN HUB
+ ip address 10.10.16.21 255.255.248.0
+ no ip redirects
+ ip mtu 1400
+ ip pim nbma-mode
+ ip nhrp authentication cisco123
+ nhrp group Tier3
+ ip nhrp map multicast dynamic
+ ip nhrp network-id 102
+ ip nhrp holdtime 600
+ ip nhrp nhs 10.10.16.1 nbma 64.64.64.1 multicast
+ ip nhrp registration no-unique
+ ip nhrp shortcut
+ ip tcp adjust-mss 1360
+ if-state nhrp
+ tunnel source GigabitEthernet0/2
+ tunnel mode gre multipoint
+ tunnel key 102
+ tunnel vrf ISP_2
+ tunnel protection ipsec profile DMVPN-PROFILE-TRANSPORT-2
+!
+interface GigabitEthernet0/0
+ ip address 10.255.1.152 255.255.0.0
+ shutdown
+ duplex auto
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/1
+ description TRANSPORT: ISP_1 DESTINATION: ISP_1 CKT ID:
+ bandwidth 100000
+ vrf forwarding ISP_1
+ ip address 65.65.65.21 255.255.255.252
+ no ip redirects
+ ip nat outside
+ ip virtual-reassembly in
+ ip policy route-map FROM-INTERNET
+ duplex auto
+ speed auto
+ media-type rj45
+ service-policy output SHAPE-INTERNET
+!
+interface GigabitEthernet0/2
+ description TRANSPORT: ISP_2 DESTINATION: ISP_2 CKT ID:
+ bandwidth 100000
+ vrf forwarding ISP_2
+ ip address 64.64.64.21 255.255.255.252
+ no ip redirects
+ ip nat outside
+ ip virtual-reassembly in
+ ip policy route-map FROM-INTERNET
+ duplex auto
+ speed auto
+ media-type rj45
+ service-policy output SHAPE-INTERNET
+!
