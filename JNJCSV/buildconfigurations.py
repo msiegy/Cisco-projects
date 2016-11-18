@@ -38,4 +38,4 @@ def build_templates(template_file, devices, role):
 
 #think about changing spoke argument to pull from pnp_config.py
 if __name__ == "__main__":
-    build_templates(TEMPLATE, DEVICES, 'Hub')
+    build_templates(TEMPLATE, DEVICES, 'Spoke')
