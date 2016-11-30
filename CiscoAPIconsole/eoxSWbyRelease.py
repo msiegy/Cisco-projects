@@ -76,6 +76,6 @@ def parsecsv():
 
 if __name__ == "__main__":
 
-    #print get_hash(sys.argv[1])
+    #print get_eox(sys.argv[1])
 
     parsecsv()
