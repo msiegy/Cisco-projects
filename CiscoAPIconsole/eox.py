@@ -4,10 +4,11 @@ import csv
 import json
 from ASD import get_token
 
-"""This script takes a CSV file containg properly formated imagenames and uses the ASD API
-   to retrieve the associated SHA512 and MD5 Checksum Hashes.
+"""This script takes a CSV file containg properly formated Software Release Names (eg: 12.2(33)SXI13 ) from
+[csvImagePath] and uses the EOX V5 API within Cisco API Console to retrieve  and the write the associated EoX
+information to a CSV.
 
-    PsuedoCode: For Each Image Name In 'csvImagePath' Run Get_Hash and append image/md5/sha tuple in 'csvWritePath'
+    PsuedoCode: For Each SW Release In 'csvImagePath' Run get_eox and append EoS, LDoS, etc tuples in 'csvWritePath'
 """
 
 
@@ -15,7 +16,7 @@ csvImagePath = 'C:/Users/matsiege/PycharmProjects/ASD/swreleases.csv'
 csvWritePath = 'C:/Users/matsiege/PycharmProjects/ASD/eoxresults.csv'
 
 def get_eox(releasename):
-    """returns image hash when providing image name"""
+    """returns release EoX info when providing release name"""
 
     token = get_token()
 
@@ -32,7 +33,7 @@ def get_eox(releasename):
     return response.text
 
 def writecsv(ReleaseName, EoS, EoM, LDoS, URL):
-    """Appends imagename, md5, and sha checksums to CSV file defined at top."""
+    """Appends ReleaseName, EoS, EoM, LDoS and URL Bulletins to CSV file defined at top."""
 
     with open(csvWritePath, 'ab') as csvfile:
         fieldnames = ['ReleaseName', 'EoS', 'EoM', 'LDoS', 'URL']
@@ -41,7 +42,7 @@ def writecsv(ReleaseName, EoS, EoM, LDoS, URL):
         writer.writerow({'ReleaseName': ReleaseName, 'EoS': EoS, 'EoM': EoM, 'LDoS':LDoS, 'URL': URL })
 
 def parsecsv():
-    """Reads CSV of Image Names and Appends results of Get_hash() to CSV file csvWritePath defined at top
+    """Reads CSV of ReleaseNames and Appends results of get_eox() to CSV file csvWritePath defined at top
      using writecsv()."""
 
     with open(csvImagePath) as csvfile:
