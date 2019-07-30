@@ -13,3 +13,4 @@ authentication tokens.
 
 The Cisco ASD API requires registration for usage and is available to
 cisco employees and SNTC customers.
+https://developer.cisco.com/docs/support-apis/#!eox/get-eox-by-product-ids
