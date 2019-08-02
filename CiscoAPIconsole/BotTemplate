@@ -52,10 +52,7 @@ def greetings():
            "Type `Help me` to see what I can do.<br/>" % bot_name
 
 
-def get_eoxbyPID(hwPID):
-    """returns HW EoX info when providing HWPID"""
-
-    return "Heres the info you wanted"
+"""Add another function that handles getting HW EoX info when provided with a PID and returning that info as a message."""
 
 
 app = Flask(__name__)
