@@ -39,5 +39,6 @@ for filename in os.listdir('configs'):
     parse.save_as(changes+'/'+filename+'.new')
 
 ### TODO
+###  - Check SW Version, HW, etc. for dot1x support
 ###  - Exclude ports with: Routed/IP Port, existing nac config, CDP/Desc includes *Router*Switch*?
 ###  - Include ports with: portfast?
