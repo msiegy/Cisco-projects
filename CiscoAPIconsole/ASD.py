@@ -10,7 +10,7 @@ def get_token():
     in future API calls."""
 
 
-    url = "https://cloudsso.cisco.com/as/token.oauth2"
+    url = "https://id.cisco.com/oauth2/default/v1/token"
 
     payload = "grant_type=client_credentials&client_id=" + client_id + "&client_secret=" + client_secret
     headers = {
@@ -19,7 +19,7 @@ def get_token():
             }
 
     response = requests.request("POST", url, data=payload, headers=headers)
-
+   # print("\n\n\n",response,"\n\n\n")
     access_token = response.json()["access_token"]
     token_type = response.json()["token_type"]
 
@@ -29,6 +29,3 @@ def get_token():
         "access_token": access_token,
         "token_type": token_type
     }
-
-#print get_token()
-
