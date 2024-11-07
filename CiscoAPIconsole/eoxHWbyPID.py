@@ -12,15 +12,15 @@ information to a CSV.
 """
 
 
-csvInputPath = 'C:/Users/matsiege/PycharmProjects/Templates/CiscoAPIconsole/hwinventory.csv'
-csvWritePath = 'C:/Users/matsiege/PycharmProjects/Templates/CiscoAPIconsole/eoxHWresults.csv'
+csvInputPath = '/Users/matsiege/code/Cisco-projects/CiscoAPIconsole/hwinventory.csv'
+csvWritePath = '/Users/matsiege/code/Cisco-projects/CiscoAPIconsole/eoxHWpidresults.csv'
 
 token = get_token()
 
 def get_eoxbyPID(hwPID):
     """returns HW EoX info when providing HWPID"""
 
-    url = "https://api.cisco.com/supporttools/eox/rest/5/EOXByProductID/1/" + hwPID
+    url = "https://apix.cisco.com/supporttools/eox/rest/5/EOXByProductID/1/" + hwPID
     headers = {
         'content-type': "application/json",
         'authorization': "" + token['token_type'] + " " + token['access_token'],
@@ -34,7 +34,7 @@ def get_eoxbyPID(hwPID):
 def writecsv(PID, EoS, EoM, EoSR, LDoS, URL, MigrationPID, MigrationURL, MigrationStrat):
     """Appends PID, EoS, EoM, LDoS and URL Bulletins to CSV file defined at top."""
 
-    with open(csvWritePath, 'ab') as csvfile:
+    with open(csvWritePath, 'a') as csvfile:
         fieldnames = ['PID', 'EoS', 'EoM', 'EoSR', 'LDoS', 'URL', 'MigrationPID', 'MigrationURL', 'MigrationStrat']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         #writer.writeheader()
@@ -50,7 +50,7 @@ def parsecsv():
             hWPID = row['PID']
             #print("HW PID from CSV:  " + hwPID)
             EoX_results = get_eoxbyPID(row['PID'])
-            #print (EoX_results)
+            print ("\n\n\n",EoX_results,"\n\n\n")
             data = json.loads(EoX_results)
             #print data
             #PID = data['EOXRecord'][0]["EOLProductID"]
