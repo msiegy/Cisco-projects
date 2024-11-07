@@ -12,8 +12,8 @@ information to a CSV.
 """
 
 
-csvInputPath = '/Users/matsiege/code/Cisco-projects/CiscoAPIconsole/hwinventory.csv'
-csvWritePath = '/Users/matsiege/code/Cisco-projects/CiscoAPIconsole/eoxHWpidresults.csv'
+csvInputPath = './hwinventory.csv'
+csvWritePath = './eoxHWpidresults.csv'
 
 token = get_token()
 
