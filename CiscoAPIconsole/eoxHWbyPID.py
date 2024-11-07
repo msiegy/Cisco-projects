@@ -8,7 +8,7 @@ from ASD import get_token
 [csvInputPath] and uses the EOX V5 API within Cisco API Console to retrieve and write the associated EoX
 information to a CSV.
 
-    PsuedoCode: For Each HW PID In 'csvInputPath' Run get_eoxbyPID and append EoS, LDoS, etc tuples in 'csvWritePath'
+For Each HW PID In 'csvInputPath' Run get_eoxbyPID and append EoS, LDoS, etc tuples in 'csvWritePath'
 """
 
 
