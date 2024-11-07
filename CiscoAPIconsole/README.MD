@@ -1,5 +1,6 @@
-This project holds files for using the Cisco ASD API, namely hashval.py
-and eox.py.
+This project holds files for using the Cisco ASD API.
+
+eoxHWbyPID.py takes a CSV file containing properly formatted Cisco Product IDs and outputs and stores End of Life milestone dates in eoxHWpidresults.csv
 
 hasval.py is a script that takes a CSV file containg properly formated
 imagenames and uses the ASD API to retrieve the associated SHA512 and
